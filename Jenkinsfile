@@ -4,45 +4,47 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'building'
+                echo 'Building...'
             }
         }
-      
-stage('Compile'){
-	steps{
-		bat 'javac Factorial.java Testfactorial.java'
-	}
-     }
 
-stage('Test'){
-	steps{
-		bat ' java Testfactorial'
-	}
-     }
-stage('Run'){
-	steps{
-		bat 'java Factorial'
-	}
-     }	
-stage('Package JAR'){
-steps{
-bat 'jar cfm factorial.jar manifest.txt Factorial.class'
-}
-}
-stage('Archive JAR'){
-	steps{
-		archiveArtifacts artifacts: 'factorial.jar'
-}
-}
-}
-post{
-	succeess{
-echo 'Build,test,run and JAR files created succesfully and artifact is ready'
+        stage('Compile') {
+            steps {
+                bat 'javac Factorial.java Testfactorial.java'
+            }
+        }
 
+        stage('Test') {
+            steps {
+                bat 'java Testfactorial'
+            }
+        }
 
-}
-failure{
-echo 'failed'
-}
-}
+        stage('Run') {
+            steps {
+                bat 'java Factorial'
+            }
+        }
+
+        stage('Package JAR') {
+            steps {
+                bat 'jar cfm factorial.jar manifest.txt Factorial.class'
+            }
+        }
+
+        stage('Archive JAR') {
+            steps {
+                archiveArtifacts artifacts: 'factorial.jar'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo ' Build, test, run, and JAR file creation successful. Artifact is ready.'
+        }
+        failure {
+            echo ' Build failed.'
+        }
+    }
 }
