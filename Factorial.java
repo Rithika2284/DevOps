@@ -1,13 +1,19 @@
 public class Factorial {
-    public static int factorial(int n) {
-        if (n == 0 || n == 1)
-            return 1;
-        else
-            return n * factorial(n - 1);
+    public static long compute(int n) {
+        long fact = 1;
+        if (n == 1 || n == 0) {
+            return fact;
+        } else {
+            // use long for larger results
+            for (int i = 1; i <= n; i++) {
+                fact *= i;
+            }
+            return fact;
+        }
     }
 
     public static void main(String[] args) {
-        int num = 7; // You can change this
-        System.out.println("Factorial of " + num + " is: " + factorial(num));
-    }
+        int num = 5; // number to find factorial of
+        System.out.println("Factorial of " + num + " is: " + compute(num));
+    }
 }
