@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                echo "Compiling Factorial.java and TestFactorial.java"
+                echo "Compiling Factorial.java and Testfactorial.java"
                 bat 'javac Factorial.java Testfactorial.java'
             }
         }
