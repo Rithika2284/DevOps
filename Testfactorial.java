@@ -1,20 +1,25 @@
 public class TestFactorial {
     public static void main(String[] args) {
-
-        if (Factorial.compute(0) != 1) {
-            System.out.println(" Test failed for input 0");
-            throw new AssertionError("Expected 1 but got " + Factorial.compute(0));
-        } else {
-            System.out.println(" Test passed for input 0");
-        }
-
-        if (Factorial.compute(5) != 120) {
-            System.out.println(" Test failed for input 5");
-            throw new AssertionError("Expected 120 but got " + Factorial.compute(5));
-        } else {
-            System.out.println(" Test passed for input 5");
-        }
-
-        System.out.println(" All tests completed.");
-    }
+        try {
+            if (Factorial.compute(5) != 120) {
+                throw new AssertionError("Test failed for 5");
+            }
+            if (Factorial.compute(3) != 6) {
+                throw new AssertionError("Test failed for 3");
+            }
+            if (Factorial.compute(4) != 24) {
+                throw new AssertionError("Test failed for 4");
+            }
+            if (Factorial.compute(6) != 720) {
+                throw new AssertionError("Test failed for 6");
+            }
+            System.out.println("All test cases passed!");
+        } catch (AssertionError e) {
+            System.out.println( e.getMessage());
+            System.exit(1);  // make Jenkins fail the build
+        } catch (Exception e) {
+            System.out.println( e.getMessage());
+            System.exit(1);
+        }
+    }
 }
