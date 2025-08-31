@@ -2,49 +2,47 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
-            steps {
-                echo 'Building...'
-            }
-        }
-
         stage('Compile') {
             steps {
-                bat 'javac Factorial.java Testfactorial.java'
+                echo "Compiling Factorial.java and TestFactorial.java"
+                bat 'javac Factorial.java TestFactorial.java'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'java Testfactorial.java'
+                echo "Running Test Cases"
+                bat 'java TestFactorial'
             }
         }
 
-        stage('Run') {
+        stage('Run Program') {
             steps {
+                echo "Running Factorial Program"
                 bat 'java Factorial'
             }
         }
 
         stage('Package JAR') {
             steps {
-                bat 'jar cfm factorial.jar manifest.txt Factorial.class'
+                echo "Packaging into JAR"
+                bat 'jar cfm Factorial.jar manifest.txt Factorial.class'
             }
         }
 
-        stage('Archive JAR') {
+        stage('Archive Artifact') {
             steps {
-                archiveArtifacts artifacts: 'factorial.jar'
+                archiveArtifacts artifacts: 'Factorial.jar'
             }
         }
     }
 
     post {
         success {
-            echo ' Build, test, run, and JAR file creation successful. Artifact is ready.'
+            echo 'Build, Test, Run, and JAR creation successful – artifact ready!'
         }
         failure {
-            echo ' Build failed.'
-        }
-    }
+            echo 'Build failed. Please check logs.'
+        }
+    }
 }
