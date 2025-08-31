@@ -5,14 +5,14 @@ pipeline {
         stage('Compile') {
             steps {
                 echo "Compiling Factorial.java and TestFactorial.java"
-                bat 'javac Factorial.java TestFactorial.java'
+                bat 'javac Factorial.java Testfactorial.java'
             }
         }
 
         stage('Test') {
             steps {
                 echo "Running Test Cases"
-                bat 'java TestFactorial'
+                bat 'java Testfactorial'
             }
         }
 
